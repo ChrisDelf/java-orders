@@ -35,6 +35,16 @@ public class CustomerServiceImpl implements CustomerService
         ArrayList<Order> list = new ArrayList<>();
         return list;
     }
+    @Override
+    public Customer findCustomerByName(String name)
+    {
+        Customer restaurant = custRepo.findByCustomName(name);
+        if(restaurant == null)
+        {
+            throw new EntityNotFoundException("name " + name);
+        }
+        return restaurant;
+    }
 
     @Override
     public void delete(long customCode) throws EntityNotFoundException

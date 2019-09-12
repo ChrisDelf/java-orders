@@ -12,6 +12,8 @@ public interface CustomerService {
 
     void delete(long customCode);
 
+    Customer findCustomerByName(String name);
+
     Customer update(Customer customer, long customCode);
 
     Customer save(Customer customer);
