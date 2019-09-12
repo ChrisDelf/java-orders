@@ -13,7 +13,7 @@ public class Customer {
     //adding the fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)// it handles the id
-    private long customerCode;
+    private long customCode;
 
 
     @Column(unique = true, // we must have a unique name and it cannot be null
@@ -33,21 +33,19 @@ public class Customer {
 
 
 
-    @ManyToOne
-    @JoinColumn(name = "agentCode",
-            nullable = false)
-    @JsonIgnoreProperties("customers")
-    private Agent agent;
 
     // one to many relationship
     // one restaurant to many menus
     // we do that with a field that is an array list
-    @OneToMany(mappedBy = "customers",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)// tells java that the next field is a one to many relationship
-    //its also tells it what field to working with
+    @ManyToOne
+    @JoinColumn(name = "agentCode", nullable = false)
+    @JsonIgnoreProperties("customers")
+    private Agent agent;
+
+    @OneToMany(mappedBy = "customer", cascade =  CascadeType.ALL)
     @JsonIgnoreProperties("customers")
     private List<Order> orders = new ArrayList<>();
+
 
 
 
@@ -70,12 +68,12 @@ public class Customer {
         this.agent = agent;
     }
 
-    public long getCustomerCode() {
-        return customerCode;
+    public long getCustomCode() {
+        return customCode;
     }
 
-    public void setCustomerCode(long customerCode) {
-        this.customerCode = customerCode;
+    public void setCustomCode(long customerCode) {
+        this.customCode = customerCode;
     }
 
     public String getCustomName() {
@@ -164,13 +162,5 @@ public class Customer {
 
     public void setAgent(Agent agent) {
         this.agent = agent;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 }

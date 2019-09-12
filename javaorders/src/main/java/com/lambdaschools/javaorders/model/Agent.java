@@ -13,7 +13,9 @@ public class Agent {
     //adding the fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)// it handles the id
+
     private long agentCode;
+
 
     private String agentName;
     private String workingArea;
@@ -21,10 +23,8 @@ public class Agent {
     private String phone;
     private String country;
 
-  @OneToMany(mappedBy = "agents",
-  cascade = CascadeType.ALL,
-  orphanRemoval = true)
-    @JsonIgnoreProperties("agents")
+   @OneToMany(mappedBy = "agent")
+  @JsonIgnoreProperties("agent")
     private List<Customer> customers = new ArrayList<>();
 
     public Agent() {

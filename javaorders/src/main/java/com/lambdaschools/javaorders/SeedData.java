@@ -1,4 +1,4 @@
-package com.lambdaschool.orders;
+package com.lambdaschools.javaorders;
 
 import com.lambdaschools.javaorders.model.Agent;
 import com.lambdaschools.javaorders.model.Customer;
@@ -67,18 +67,18 @@ public class SeedData implements CommandLineRunner
         Customer c24 = new Customer("Venkatpati", "Bangalore", "Bangalore", "India", "2", 8000.00, 11000.00, 7000.00, 12000.00, "JRTVFDD", a07);
         Customer c25 = new Customer("Sundariya", "Chennai", "Chennai", "India", "3", 7000.00, 11000.00, 7000.00, 11000.00, "PPHGRTS", a10);
 
-        Order o01 = new Order(1000.00, 600.00, "c13", "SOD");
-        Order o02 = new Order(3000.00, 500.00, "c19", "SOD");
-        Order o03 = new Order(4500.00, 900.00, "c07", "SOD");
-        Order o04 = new Order(2000.00, 400.00, "c16", "SOD");
-        Order o05 = new Order(4000.00, 600.00, "c22", "SOD");
-        Order o06 = new Order(2000.00, 300.00, "c12", "SOD");
-        Order o07 = new Order(3500.00, 2000.00, "c02", "SOD");
-        Order o08 = new Order(2500.00, 400.00, "c03", "SOD");
-        Order o09 = new Order(500.00, 100.00, "c23", "SOD");
-        Order o10 = new Order(4000.00, 700.00, "c07", "SOD");
-        Order o11 = new Order(1500.00, 600.00, "c08", "SOD");
-        Order o12 = new Order(2500.00, 400.00, "c25", "SOD");
+        Order o01 = new Order(1000.00, 600.00, c13, a03, "SOD");
+        Order o02 = new Order(3000.00, 500.00, c19, a10, "SOD");
+        Order o03 = new Order(4500.00, 900.00, c07, a10, "SOD");
+        Order o04 = new Order(2000.00, 400.00, c16, a07,"SOD");
+        Order o05 = new Order(4000.00, 600.00, c22, a02, "SOD");
+        Order o06 = new Order(2000.00, 300.00, c12, a12,"SOD");
+        Order o07 = new Order(3500.00, 2000.00, c02, a08,"SOD");
+        Order o08 = new Order(2500.00, 400.00, c03, a04,"SOD");
+        Order o09 = new Order(500.00, 100.00, c23, a06,"SOD");
+        Order o10 = new Order(4000.00, 700.00, c07, a10, "SOD");
+        Order o11 = new Order(1500.00, 600.00, c08, a04,"SOD");
+        Order o12 = new Order(2500.00, 400.00, c25, a11, "SOD");
 
         agentrepos.save(a01);
         agentrepos.save(a02);
