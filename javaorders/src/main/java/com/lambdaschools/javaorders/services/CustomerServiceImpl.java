@@ -30,15 +30,9 @@ public class CustomerServiceImpl implements CustomerService
     }
 
     @Override
-    public List<Order> findAllOrdersByName(String name) throws EntityNotFoundException
-    {
-        ArrayList<Order> list = new ArrayList<>();
-        return list;
-    }
-    @Override
     public Customer findCustomerByName(String name)
     {
-        Customer restaurant = custRepo.findByCustomName(name);
+        Customer restaurant = custRepo.findBycustname(name);
         if(restaurant == null)
         {
             throw new EntityNotFoundException("name " + name);
@@ -47,15 +41,15 @@ public class CustomerServiceImpl implements CustomerService
     }
 
     @Override
-    public void delete(long customCode) throws EntityNotFoundException
+    public void delete(long custCode) throws EntityNotFoundException
     {
 
-        if (custRepo.findById(customCode).isPresent())
+        if (custRepo.findById(custCode).isPresent())
         {
-            custRepo.deleteById(customCode);
+            custRepo.deleteById(custCode);
         } else
         {
-            throw new EntityNotFoundException(Long.toString(customCode));
+            throw new EntityNotFoundException(Long.toString(custCode));
         }
     }
 
@@ -65,26 +59,82 @@ public class CustomerServiceImpl implements CustomerService
     {
         Customer newCustomer = new Customer();
 
-        newCustomer.setCustomName(customer.getCustomName());
-        newCustomer.setCity(customer.getCity());
-        newCustomer.setCustCountry(customer.getCustCountry());
-        newCustomer.setPhone(customer.getPhone());
-        newCustomer.setWorkingArea(customer.getWorkingArea());
+        newCustomer.setCustname(customer.getCustname());
+        newCustomer.setCustcity(customer.getCustcity());
+        newCustomer.setWorkingarea(customer.getWorkingarea());
+        newCustomer.setCustcountry(customer.getCustcountry());
         newCustomer.setGrade(customer.getGrade());
-        newCustomer.setOpeningAmt(customer.getOpeningAmt());
-        newCustomer.setOutstandingAmt(customer.getOutstandingAmt());
-        newCustomer.setReceiveAmt(customer.getReceiveAmt());
-        newCustomer.setPaymentAmt(customer.getPaymentAmt());
+        newCustomer.setOpeningamt(customer.getOpeningamt());
+        newCustomer.setReceiveamt(customer.getReceiveamt());
+        newCustomer.setPaymentamt(customer.getPaymentamt());
+        newCustomer.setOutstandingamt(customer.getOutstandingamt());
+        newCustomer.setPhone(customer.getPhone());
+        newCustomer.setAgent(customer.getAgent());
 
+        for (Order o : customer.getOrders())
+        {
+            newCustomer.getOrders().add(new Order(o.getOrdamount(), o.getAdvancedamount(), newCustomer, o.getOrderDescription()));
+        }
         return custRepo.save(newCustomer);
     }
-
     @Transactional
     @Override
-    public Customer update(Customer customer, long custCode)
+    public Customer update(Customer customer, long id)
     {
-        return null;
-    }
+        Customer currentCustomer = custRepo.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+        if (customer.getCustname() != null)
+        {
+            currentCustomer.setCustname(customer.getCustname());
+        }
+        if (customer.getCustcity() != null)
+        {
+            currentCustomer.setCustcity(customer.getCustcity());
+        }
+        if (customer.getWorkingarea() != null)
+        {
+            currentCustomer.setWorkingarea(customer.getWorkingarea());
+        }
+        if (customer.getCustcountry() != null)
+        {
+            currentCustomer.setCustcountry(customer.getCustcountry());
+        }
+        if (customer.getGrade() != null)
+        {
+            currentCustomer.setGrade(customer.getGrade());
+        }
+        if (customer.getOpeningamt() != 0)
+        {
+            currentCustomer.setOpeningamt(customer.getOpeningamt());
+        }
+        if (customer.getReceiveamt() != 0)
+        {
+            currentCustomer.setReceiveamt(customer.getReceiveamt());
+        }
+        if (customer.getPaymentamt() != 0)
+        {
+            currentCustomer.setPaymentamt(customer.getPaymentamt());
+        }
+        if (customer.getOpeningamt() != 0)
+        {
+            currentCustomer.setOpeningamt(customer.getOpeningamt());
+        }
+        if (customer.getPhone() != null)
+        {
+            currentCustomer.setPhone(customer.getPhone());
+        }
+        if (customer.getAgent() != null)
+        {
+            currentCustomer.setAgent(customer.getAgent());
+        }
 
+        if (customer.getOrders().size() > 0)
+        {
+            for (Order o : customer.getOrders())
+            {
+                currentCustomer.getOrders().add(new Order(o.getOrdamount(), o.getAdvancedamount(), currentCustomer, o.getOrderDescription()));
+            }
+        }
+        return custRepo.save(currentCustomer);
+    }
 
 }

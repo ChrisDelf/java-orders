@@ -13,22 +13,22 @@ public class Customer {
     //adding the fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)// it handles the id
-    private long customCode;
+    private long custcode;
+
 
 
     @Column(unique = true, // we must have a unique name and it cannot be null
             nullable = false) // only affects the field that is below it.
 // our fields will become columns
-    private String customName;
-
-    private String city;
-    private String workingArea;
-    private String custCountry;
+    private String custname;
+    private String custcity;
+    private String workingarea;
+    private String custcountry;
     private String grade;
-    private double openingAmt;
-    private double receiveAmt;
-    private double paymentAmt;
-    private double outstandingAmt;
+    private double openingamt;
+    private double receiveamt;
+    private double paymentamt;
+    private double outstandingamt;
     private String phone;
 
 
@@ -37,130 +37,161 @@ public class Customer {
     // one to many relationship
     // one restaurant to many menus
     // we do that with a field that is an array list
-    @ManyToOne
-    @JoinColumn(name = "agentCode", nullable = false)
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "agentcode", nullable = false)
     @JsonIgnoreProperties("customers")
     private Agent agent;
 
-    @OneToMany(mappedBy = "customer", cascade =  CascadeType.ALL)
-    @JsonIgnoreProperties("customers")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("customer")
     private List<Order> orders = new ArrayList<>();
 
 
-
-
-
     public Customer() {
-
     }
 
-    public Customer(String customName, String city, String workingArea, String custCountry, String grade, double openingAmt, double receiveAmt, double paymentAmt, double outstandingAmt, String phone, Agent agent) {
-        this.customName = customName;
-        this.city = city;
-        this.workingArea = workingArea;
-        this.custCountry = custCountry;
+    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agent)
+    {
+        this.custname = custname;
+        this.custcity = custcity;
+        this.workingarea = workingarea;
+        this.custcountry = custcountry;
         this.grade = grade;
-        this.openingAmt = openingAmt;
-        this.receiveAmt = receiveAmt;
-        this.paymentAmt = paymentAmt;
-        this.outstandingAmt = outstandingAmt;
+        this.openingamt = openingamt;
+        this.receiveamt = receiveamt;
+        this.paymentamt = paymentamt;
+        this.outstandingamt = outstandingamt;
         this.phone = phone;
         this.agent = agent;
     }
 
-    public long getCustomCode() {
-        return customCode;
+
+    public long getCustcode() {
+        return custcode;
     }
 
-    public void setCustomCode(long customerCode) {
-        this.customCode = customerCode;
+    public void setCustcode(long custcode) {
+        this.custcode = custcode;
     }
 
-    public String getCustomName() {
-        return customName;
+    public String getCustname()
+    {
+        return custname;
     }
 
-    public void setCustomName(String customName) {
-        this.customName = customName;
+    public void setCustname(String custname)
+    {
+        this.custname = custname;
     }
 
-    public String getCity() {
-        return city;
+    public String getCustcity()
+    {
+        return custcity;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCustcity(String custcity)
+    {
+        this.custcity = custcity;
     }
 
-    public String getWorkingArea() {
-        return workingArea;
+    public String getWorkingarea()
+    {
+        return workingarea;
     }
 
-    public void setWorkingArea(String workingArea) {
-        this.workingArea = workingArea;
+    public void setWorkingarea(String workingarea)
+    {
+        this.workingarea = workingarea;
     }
 
-    public String getCustCountry() {
-        return custCountry;
+    public String getCustcountry()
+    {
+        return custcountry;
     }
 
-    public void setCustCountry(String custCountry) {
-        this.custCountry = custCountry;
+    public void setCustcountry(String custcountry)
+    {
+        this.custcountry = custcountry;
     }
 
-    public String getGrade() {
+    public String getGrade()
+    {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(String grade)
+    {
         this.grade = grade;
     }
 
-    public double getOpeningAmt() {
-        return openingAmt;
+    public double getOpeningamt()
+    {
+        return openingamt;
     }
 
-    public void setOpeningAmt(double openingAmt) {
-        this.openingAmt = openingAmt;
+    public void setOpeningamt(double openingamt)
+    {
+        this.openingamt = openingamt;
     }
 
-    public double getReceiveAmt() {
-        return receiveAmt;
+    public double getReceiveamt()
+    {
+        return receiveamt;
     }
 
-    public void setReceiveAmt(double receiveAmt) {
-        this.receiveAmt = receiveAmt;
+    public void setReceiveamt(double receiveamt)
+    {
+        this.receiveamt = receiveamt;
     }
 
-    public double getPaymentAmt() {
-        return paymentAmt;
+    public double getPaymentamt()
+    {
+        return paymentamt;
     }
 
-    public void setPaymentAmt(double paymentAmt) {
-        this.paymentAmt = paymentAmt;
+    public void setPaymentamt(double paymentamt)
+    {
+        this.paymentamt = paymentamt;
     }
 
-    public double getOutstandingAmt() {
-        return outstandingAmt;
+    public double getOutstandingamt()
+    {
+        return outstandingamt;
     }
 
-    public void setOutstandingAmt(double outstandingAmt) {
-        this.outstandingAmt = outstandingAmt;
+    public void setOutstandingamt(double outstandingamt)
+    {
+        this.outstandingamt = outstandingamt;
     }
 
-    public String getPhone() {
+    public String getPhone()
+    {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(String phone)
+    {
         this.phone = phone;
     }
 
-    public Agent getAgent() {
+    public Agent getAgent()
+    {
         return agent;
     }
 
-    public void setAgent(Agent agent) {
+    public void setAgent(Agent agent)
+    {
         this.agent = agent;
+    }
+
+    public List<Order> getOrders()
+    {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders)
+    {
+        this.orders = orders;
     }
 }

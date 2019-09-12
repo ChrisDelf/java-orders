@@ -5,16 +5,15 @@ import com.lambdaschools.javaorders.model.Order;
 
 import java.util.List;
 
-public interface CustomerService {
+public interface CustomerService
+{
     List<Customer> findAll();
-
-    List<Order> findAllOrdersByName(String name);
-
-    void delete(long customCode);
 
     Customer findCustomerByName(String name);
 
-    Customer update(Customer customer, long customCode);
+    void delete(long custcode);
 
     Customer save(Customer customer);
+
+    Customer update(Customer customer, long id);
 }

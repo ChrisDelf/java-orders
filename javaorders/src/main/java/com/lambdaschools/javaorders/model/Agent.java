@@ -10,32 +10,33 @@ import java.util.List;
 @Table(name = "agents")
 public class Agent {
 
+
+
     //adding the fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)// it handles the id
-
     private long agentCode;
 
 
-    private String agentName;
-    private String workingArea;
+    private String agentname;
+    private String workingarea;
     private double commission;
     private String phone;
     private String country;
 
-   @OneToMany(mappedBy = "agent")
-  @JsonIgnoreProperties("agent")
+    @OneToMany(mappedBy = "agent",
+            cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("agent")
     private List<Customer> customers = new ArrayList<>();
 
     public Agent() {
     }
 
-    public Agent(String agentName, String workingArea, double commission, String phone, String country) {
-        this.agentName = agentName;
-        this.workingArea = workingArea;
+    public Agent(String agentname, String workingarea, double commission, String phone,String Country ) {
+        this.agentname = agentname;
+        this.workingarea = workingarea;
         this.commission = commission;
         this.phone = phone;
-        this.country = country;
     }
 
     public long getAgentCode() {
@@ -46,20 +47,20 @@ public class Agent {
         this.agentCode = agentCode;
     }
 
-    public String getAgentName() {
-        return agentName;
+    public String getAgentname() {
+        return agentname;
     }
 
-    public void setAgentName(String agentName) {
-        this.agentName = agentName;
+    public void setAgentname(String agentname) {
+        this.agentname = agentname;
     }
 
-    public String getWorkingArea() {
-        return workingArea;
+    public String getWorkingarea() {
+        return workingarea;
     }
 
-    public void setWorkingArea(String workingArea) {
-        this.workingArea = workingArea;
+    public void setWorkingarea(String workingarea) {
+        this.workingarea = workingarea;
     }
 
     public double getCommission() {
